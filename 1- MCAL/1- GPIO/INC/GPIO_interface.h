@@ -22,7 +22,7 @@ typedef enum
 	GPIO_PORTF,
 	GPIO_PORTG,
 	GPIO_PORTH
-}GPIO_Port;
+}Port_t;
 
 typedef enum
 {
@@ -42,7 +42,7 @@ typedef enum
 	GPIO_PIN13,
 	GPIO_PIN14,
 	GPIO_PIN15
-}GPIO_PIN;
+}PIN_t;
 
 typedef enum
 {
@@ -50,7 +50,7 @@ typedef enum
 	PIN_OUTPUT,
 	PIN_ALTFunc,
 	PIN_Analog
-}PIN_Mode;
+}Mode_t;
 
 typedef enum
 {
@@ -64,14 +64,14 @@ typedef enum
 	MEDIUM_SPEED,
 	FAST_SPEED,
 	HIGH_SPEED
-}OutputSpeed;
+}OutputSpeed_t;
 
 typedef enum
 {
 	FLOATING,
 	PULL_UP,
 	PULL_DOWN
-}PullUpDown;
+}PullUpDown_t;
 
 typedef enum
 {
@@ -91,7 +91,7 @@ typedef enum
 	AF13,
 	AF14,
 	AF15,
-}AltFunOption;
+}AltFunOption_t;
 
 typedef enum
 {
@@ -101,13 +101,13 @@ typedef enum
 
 typedef struct
 {
-	u8 Port;                           /*Refer to Port Possible values*/
-	u8 PinNum;                         /*Refer to Pin Number Possible values*/
-	u8 Mode;                           /*Refer to Mode Possible values*/
-	u8 OutputType;                     /*Refer to Output Type Possible values*/
-	u8 OutputSpeed;                    /*Refer to Output Speed Possible values*/
-	u8 PullUpDown;                     /*Refer to Pull Up / Down Possible values*/
-	u8 AlternateFuncOption;            /*Refer to Alternate FuncOption Possible values*/
+	Port_t Port;                           	/*Refer to Port Possible values*/
+	PIN_t PinNum;                         	/*Refer to Pin Number Possible values*/
+	Mode_t Mode;                           	/*Refer to Mode Possible values*/
+	Output_t OutputType;					/*Refer to Output Type Possible values*/
+	OutputSpeed_t OutputSpeed;              /*Refer to Output Speed Possible values*/
+	PullUpDown_t PullUpDown;                /*Refer to Pull Up / Down Possible values*/
+	AltFunOption_t AlternateFuncOption;     /*Refer to Alternate FuncOption Possible values*/
 }PinConfig_t;
 
 /*Common Port Value Possible Options*/

@@ -41,11 +41,31 @@ typedef struct
 
 #define NVIC						((NVIC_RegDef_t*)NVIC_BASE_ADDRESS)
 
-/*****************************		SCB Registers	*****************************/
+/**************************** SCB Peripheral Base Addresses *************************/
 
 #define SCB_BASE_ADDRESS		0xE000ED00UL
 
-#define SCB_AIRCR				(SCB_BASE_ADDRESS+0x0C)
+/************************** SCB Register Definition Structure ***********************/
+
+typedef struct
+{
+	volatile u32 CPUID;					/*CPUID base register*/
+	volatile u32 ICSR;                  /*Interrupt control and state register*/
+	volatile u32 VTOR;                  /*Vector table offset register*/
+	volatile u32 AIRCR;                 /*Application interrupt and reset control register*/
+	volatile u32 SCR;                   /*System control register*/
+	volatile u32 CCR;                   /*Configuration and control register*/
+	volatile u32 SHPR[3];               /*System handler priority registers*/
+	volatile u32 SHCSR;                 /*System handler control and state register*/
+	volatile u32 CFSR;                  /*Configurable fault status register*/
+	volatile u32 HFSR;                  /*Hard fault status register*/
+	volatile u32 Reserved;
+	volatile u32 MMAR;                  /*Memory management fault address register*/
+	volatile u32 BFAR;                  /*Bus fault status register*/
+	volatile u32 AFSR;                  /*Auxiliary fault status register*/
+}SCB_RegDef_t;
+
+#define SCB					((SCB_RegDef_t*) SCB_BASE_ADDRESS)
 
 /***************************** Memories Base Addresses ******************************/
 #define FLASH_BASE_ADDRESS		0x08000000UL
@@ -115,7 +135,7 @@ typedef struct
 #define GPIOG			((GPIO_RegDef_t*)GPIOG_BASE_ADDRESS)
 #define GPIOH			((GPIO_RegDef_t*)GPIOH_BASE_ADDRESS)
 
-/************************* GPIO Register Definition Structure ***********************/
+/************************* RCC Register Definition Structure ***********************/
 
 typedef struct
 {
@@ -166,5 +186,68 @@ typedef struct
 #define RCC_CR_PLLON		24		/*Enable Main PLL*/
 #define RCC_CR_PLLI2SON		26		/*Enable PLLI2S*/
 #define RCC_CR_PLLSAION		28		/*Enable PLLSAI*/
+
+/************************* SYSCFG Register Definition Structure ***********************/
+
+typedef struct
+{
+	volatile u32 MEMRMP;			/*SYSCFG memory remap register*/
+	volatile u32 PMC;				/*SYSCFG peripheral mode configuration register*/
+	volatile u32 EXTICR[4];			/*SYSCFG external interrupt configuration registers*/
+	u32 Reserved[2];
+	volatile u32 CMPCR;				/*Compensation cell control register*/
+	u32 Reserved2[2];
+	volatile u32 CFGR;				/*SYSCFG configuration register*/
+}SYSCFG_RegDef_t;
+
+/***************************** SYSCFG Peripheral Definitions **************************/
+
+#define SYSCFG					((SYSCFG_RegDef_t*)SYSCFG_BASE_ADDRESS)
+
+/************************* EXTI Register Definition Structure ***********************/
+
+typedef struct
+{
+	volatile u32 IMR;               /*Interrupt mask register*/
+	volatile u32 EMR;               /*Event mask register*/
+	volatile u32 RTSR;              /*Rising trigger selection register*/
+	volatile u32 FTSR;              /*Falling trigger selection register*/
+	volatile u32 SWIER;             /*Software interrupt event register*/
+	volatile u32 PR;                /*Pending register*/
+}EXTI_RegDef_t;
+
+/***************************** EXTI Peripheral Definitions **************************/
+
+#define EXTI					((EXTI_RegDef_t*)EXTI_BASE_ADDRESS)
+
+/**************************** DMA Peripheral Base Addresses *************************/
+
+#define DMA1_BASE_ADDRESS		0x40026000UL
+
+#define DMA2_BASE_ADDRESS		0x40026400UL
+
+/************************** DMA Register Definition Structure ***********************/
+
+typedef struct
+{
+	volatile u32 CR;				/*DMA stream x configuration register*/
+	volatile u32 NDTR;              /*DMA stream x number of data register*/
+	volatile u32 PAR;               /*DMA stream x peripheral address register*/
+	volatile u32 M0AR;              /*DMA stream x memory 0 address register*/
+	volatile u32 M1AR;               /*DMA stream x memory 1 address register*/
+	volatile u32 FCR;               /*DMA stream x FIFO control register*/
+}DMA_Stream_t;
+
+typedef struct
+{
+	volatile u32 LISR;				/*DMA low interrupt status register*/
+	volatile u32 HISR;              /*DMA high interrupt status register*/
+	volatile u32 LIFCR;             /*DMA low interrupt flag clear register*/
+	volatile u32 HIFCR;             /*DMA high interrupt flag clear register*/
+	volatile DMA_Stream_t Stream[8];
+}DMA_RegDef_t;
+
+#define DMA1					((DMA_RegDef_t*)DMA1_BASE_ADDRESS)	
+#define DMA2					((DMA_RegDef_t*)DMA2_BASE_ADDRESS)	
 
 #endif
